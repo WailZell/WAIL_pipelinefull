@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "intech-df2134"
+		},
+		"AzureDataLakeStoragelinkservices_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStoragelinkservices_properties_typeProperties_url": {
+			"value": "https://intechrg.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://intech-kv2134.vault.azure.net/"
+		},
+		"SqlServerOnprimelinkedservices_properties_typeProperties_server": {
+			"value": "WWW\\SQLEXPRESS"
+		},
+		"SqlServerOnprimelinkedservices_properties_typeProperties_database": {
+			"value": "AdventureWorksLT2022"
+		},
+		"SqlServerOnprimelinkedservices_properties_typeProperties_userName": {
+			"value": "luke"
+		}
+	}
+}
