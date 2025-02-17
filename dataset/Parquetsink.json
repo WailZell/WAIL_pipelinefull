@@ -1,0 +1,19 @@
+{
+	"name": "Parquetsink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStoragelinkservices",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
