@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"server": "WWW",
+			"server": "WWW\\SQLEXPRESS",
 			"database": "AdventureWorksLT2022",
 			"encrypt": "optional",
 			"trustServerCertificate": false,
