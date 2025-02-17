@@ -1,0 +1,9 @@
+{
+	"name": "intech-df2134",
+	"location": "francecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "cd817541-2ef7-465f-87d9-0507d1a24223",
+		"tenantId": "5d714b84-612a-484c-b96c-7e33341a2ffc"
+	}
+}
