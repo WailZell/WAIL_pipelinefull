@@ -19,6 +19,10 @@
 			"type": "string",
 			"defaultValue": "https://intech-kv2134.vault.azure.net/"
 		},
+		"AzureDatabrickslinkedservices_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0218-102809-t1p6j2lz"
+		},
 		"SqlServerOnprimelinkedservices_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "WWW\\SQLEXPRESS"
@@ -114,6 +118,30 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStoragelinkservices')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabrickslinkedservices')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-3985990865378768.8.azuredatabricks.net",
+					"accessToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "accesdatabricks"
+					},
+					"existingClusterId": "[parameters('AzureDatabrickslinkedservices_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
 			]
 		},
 		{
@@ -325,6 +353,60 @@
 								}
 							]
 						}
+					},
+					{
+						"name": "bronze to silver",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/bensouda8wail@gmail.com/bronze to silver note book"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabrickslinkedservices",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "silver to gold",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "bronze to silver",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/bensouda8wail@gmail.com/silver to gold"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabrickslinkedservices",
+							"type": "LinkedServiceReference"
+						}
 					}
 				],
 				"policy": {
@@ -334,6 +416,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SqlServerinprime')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabrickslinkedservices')]",
 				"[concat(variables('factoryId'), '/datasets/Parquetsink')]"
 			]
 		}
