@@ -18,15 +18,7 @@
 				"interval": 1,
 				"startTime": "2025-02-18T12:45:15",
 				"endTime": "2025-02-19T12:36:00",
-				"timeZone": "Romance Standard Time",
-				"schedule": {
-					"minutes": [
-						41
-					],
-					"hours": [
-						13
-					]
-				}
+				"timeZone": "Romance Standard Time"
 			}
 		}
 	}
