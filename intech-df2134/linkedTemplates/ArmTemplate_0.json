@@ -444,7 +444,14 @@
 						"startTime": "2025-02-18T12:50:42",
 						"endTime": "2025-02-19T12:36:00",
 						"timeZone": "Romance Standard Time",
-						"schedule": {}
+						"schedule": {
+							"minutes": [
+								53
+							],
+							"hours": [
+								13
+							]
+						}
 					}
 				}
 			},
